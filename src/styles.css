@@ -1,0 +1,29 @@
+#chessBoard {
+    display: flex;
+    flex-wrap: wrap;
+    height: 400px;
+    width: 400px;
+    border: 1px solid black;
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    background-color: aquamarine;
+}
+
+.white {
+    background-color: aliceblue;
+    
+}
+
+.black {
+    background-color: aqua;
+}
+
+.piece {
+    font-size: 40px;
+}
