@@ -26,6 +26,7 @@ function initializeBoard() {
             square.setAttribute("class", "square black")
         }
         square.innerHTML = piece
+        square.firstChild?.setAttribute('draggable', true)
         chessBoard.appendChild(square)
         
         row++
@@ -36,11 +37,55 @@ function initializeBoard() {
     })
 };
 
-function setEventHandlers() {
-    //TODO
+initializeBoard();
+const squares = document.querySelectorAll(".square");
+const pieces = document.querySelectorAll(".piece")
+
+function setEventListeners() {
+    pieces.forEach((piece) => {
+        piece.addEventListener('dragstart', dragStart)
+        // piece.addEventListener('dragover', dragOver)
+        // piece.addEventListener('drop', dragDrop)
+    })
+    
+    squares.forEach((square) => {
+        //square.addEventListener('dragstart', dragStart)
+        square.addEventListener('dragover', dragOver)
+        square.addEventListener('drop', dragDrop)
+    })
 };
 
-initializeBoard();
+let draggedElement
+let startPositionId
+function dragStart(e) {
+    console.log("dragStart: ", e.target)
+    draggedElement = e.target
+    startPositionId = e.target.parentNode.getAttribute('id')
+    
+}
+
+function dragOver(e){
+    e.preventDefault()
+}
+
+function dragDrop(e) {
+    e.stopPropagation()
+
+    const containsPiece = e.target.classList.contains('piece')
+    if(containsPiece) {
+        e.target.parentNode.append(draggedElement)
+        e.target.remove()
+    }
+    else {
+        e.target.append(draggedElement)
+    }
+
+    console.log("dragDrop: ", e.target)
+    
+
+}
+
+setEventListeners();
 
 
 
