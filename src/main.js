@@ -1,12 +1,14 @@
 const squares = document.querySelectorAll(".square");
 const pieces = document.querySelectorAll(".piece");
 const playerDisplay = document.getElementById("playerDisplay");
+const width = 8;
 
-let player = "white";
+let player = "black";
+let boardReversed = false
 let selectedPiece = null;
 let startPositionId = null;
 
-playerDisplay.innerHTML = player;
+changePlayer()
 
 //Block unintended drag
 document.addEventListener("dragstart", (e) => {
@@ -42,9 +44,8 @@ function dragOver(e){
 function dragDrop(e) {
     e.stopPropagation()
 
-    if(selectedPiece.classList.contains(player)){
-        const containsPiece = e.target.classList.contains('piece');
-
+    if(moveIsValid(e)){
+        let containsPiece = e.target.classList.contains('piece');
         if(containsPiece) {
             e.target.parentNode.append(selectedPiece)
             e.target.remove()
@@ -52,19 +53,34 @@ function dragDrop(e) {
         else {
             e.target.append(selectedPiece)
         }
-
-        console.log("dragDrop: ", e.target);
-        selectedPiece = null;
         changePlayer();
     }
+    selectedPiece = null;
 }
 
 function changePlayer(){
     if(player === "white"){
         player = "black";
     }
-    else{
+    else if (player === "black") {
         player = "white";
     }
     playerDisplay.innerHTML = player;
+    flipBoard()
 };
+
+function flipBoard() {
+    const allSquares = document.querySelectorAll(".square")
+    if(!boardReversed){
+        allSquares.forEach((square, i) => {
+            square.setAttribute('id', width * width - 1 - i)
+        })
+        boardReversed = true;
+    }
+    else {
+        allSquares.forEach((square, i) => {
+            square.setAttribute('id', i)
+        })
+        boardReversed = false;
+    }
+}
