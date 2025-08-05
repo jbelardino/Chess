@@ -24,13 +24,13 @@ body {
     overflow: hidden;
 }
 
-.white {
-    background-color: aliceblue;
+.light {
+    background-color: rgb(255, 255, 255);
     
 }
 
-.black {
-    background-color: aqua;
+.dark {
+    background-color: rgb(108, 158, 151);
 }
 
 .piece {
@@ -41,5 +41,9 @@ body {
 .piece span {
     pointer-events: none;
     font-size: 40px;
+}
+
+.display {
+    font-size: 30px;
 }
 
