@@ -1,2 +1,3 @@
 A recreation of chess using javascript and html.
-https://github.com/jbelardino/Chess/blob/main/chess.png
+![alt text]([http://url/to/img.png](https://github.com/jbelardino/Chess/blob/main/chess.png))
+
